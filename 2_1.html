@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>速度动画</title>
+<style type="text/css">
+body,ul,li{padding: 0;margin: 0;}
+#div1{
+	position: relative;
+	width: 200px;
+	height: 200px;
+	background: red;
+	left:-200px;
+	top:0;
+}
+#div1 span{
+	width: 40px;
+	height: 50px;
+	background: blue;
+	position: absolute;
+	left: 200px;
+	top: 75px;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oDiv = document.getElementById('div1');
+	oDiv.onmouseover = function(){
+		startMove(0);
+	}
+	oDiv.onmouseout = function(){
+		startMove(-200);
+	}
+var timer = NULL;
+function startMove(iTarget){
+	clearInterval(timer);
+	var oDiv = document.getElementById('div1');
+	timer = setInterval(function(){
+		var speed = 0;
+		if(oDiv.offsetLeft>iTarget){
+			speed = -10;
+		}
+		else{
+			speed = 10;
+		}
+		if(oDiv.offsetLeft == iTarget){
+			clearInterval(timer);
+		}
+		else{
+		    oDiv.style.left = oDiv.offsetLeft+speed+'px';
+	    }
+	},30)
+}
+}
+</script>
+
+<body>
+	<div id="div1">
+		<span>run</span>
+	</div>
+
+</body>
+
+</html>
